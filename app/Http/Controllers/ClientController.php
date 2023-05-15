@@ -14,7 +14,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-
+        $clients = Client::all();
+        return response()->json($clients);
     }
 
     /**
@@ -25,7 +26,27 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new Client();
+        $client->create(
+            [
+                'document' => $request->document,
+                'corporate_name' => $request->corporate_name,
+                'name' => $request->name,
+                'phone' => $request->phone,
+            ]
+        );
+
+        if(!$client){
+            [
+                'message' => "Not created",
+            ];
+        }
+
+        return response()->json(
+            [
+                'message' => "Created",
+            ]
+        );
     }
 
     /**
@@ -34,9 +55,19 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show($id)
     {
-        //
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response()->json(
+                [
+                    'message' => "Not founded",
+                ]
+            );
+        }
+
+        return response()->json($client);
     }
 
     /**
@@ -46,10 +77,43 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response()->json(
+                [
+                    'message' => "Not founded",
+                ]
+            );
+        }
+
+        $client->update(
+            [
+                'document' => $request->document,
+                'corporate_name' => $request->corporate_name,
+                'name' => $request->name,
+                'phone' => $request->phone,
+            ]
+        );
+
+        if (!$client) {
+            return response()->json(
+                [
+                    'message' => "Not updated",
+                ]
+            );
+        }
+
+        return response()->json(
+            [
+                'message' => "Updated!",
+            ]
+        );
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -57,8 +121,20 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response()->json([
+                'message' => "Not founded",
+            ]);
+        }
+
+        if ($client->delete()) {
+            return response()->json([
+                'message' => "Deletado com Sucesso !",
+            ]);
+        }
     }
 }
