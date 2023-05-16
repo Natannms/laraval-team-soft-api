@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddressRequest;
+use App\Services\GeolocationService;
 use App\Models\Address;
 use Illuminate\Http\Request;
 
@@ -24,35 +26,40 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddressRequest $request)
     {
+
+        //buscnado localização via google api
+        $location = new GeolocationService();
+        $coordinates = $location->getAddress('31872050');
+
         $address = new Address();
         $address->create(
-             [
-                'client_id'=> $request->client_id,
-                'street'=> $request->street,
-                'number'=> $request->number,
-                'district'=> $request->district,
-                'city'=> $request->city,
-                'state'=> $request->state,
-                'complement'=> $request->complement,
-                'zip_code'=> $request->zip_code,
-                'latitude'=> $request->latitude,
-                'longitude'=> $request->longitude,
-             ]
-         );
+            [
+                'client_id' => $request->client_id,
+                'street' => $request->street,
+                'number' => $request->number,
+                'district' => $request->district,
+                'city' => $request->city,
+                'state' => $request->state,
+                'complement' => $request->complement,
+                'zip_code' => $request->zip_code,
+                'latitude' => $coordinates['lat'],
+                'longitude' => $coordinates['lng'],
+            ]
+        );
 
-         if(!$address){
-             [
-                 'message' => "Not created",
-             ];
-         }
+        if (!$address) {
+            [
+                'message' => "Not created",
+            ];
+        }
 
-         return response()->json(
-             [
-                 'message' => "Created",
-             ]
-         );
+        return response()->json(
+            [
+                'message' => "Created",
+            ]
+        );
     }
 
     /**
@@ -97,15 +104,15 @@ class AddressController extends Controller
 
         $address->update(
             [
-                'street'=> $request->street,
-                'number'=> $request->number,
-                'district'=> $request->district,
-                'city'=> $request->city,
-                'state'=> $request->state,
-                'complement'=> $request->complement,
-                'zip_code'=> $request->zip_code,
-                'latitude'=> $request->latitude,
-                'longitude'=> $request->longitude,
+                'street' => $request->street,
+                'number' => $request->number,
+                'district' => $request->district,
+                'city' => $request->city,
+                'state' => $request->state,
+                'complement' => $request->complement,
+                'zip_code' => $request->zip_code,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
             ]
         );
 
