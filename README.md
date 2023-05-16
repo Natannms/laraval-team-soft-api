@@ -1,66 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+#  API de Cadastro de Clientes e Endereços
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Este projeto é uma API desenvolvida em Laravel 9 para o cadastro de clientes e seus respectivos endereços. Ele permite o gerenciamento de clientes, incluindo a criação, atualização, exclusão e obtenção de informações. Além disso, é possível cadastrar múltiplos endereços para cada cliente.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##  Requisitos
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+Antes de executar o projeto, certifique-se de que seu ambiente atenda aos seguintes requisitos:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+-  [PHP](https://www.php.net/) versão 8.0 ou superior
 
-## Contributing
+-  [Composer](https://getcomposer.org/) instalado globalmente
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-  [MySQL](https://www.mysql.com/) ou outro banco de dados compatível com o Laravel 9
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+##  Instalação
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Siga as etapas abaixo para executar o projeto localmente:
+
+
+
+1. Clone o projeto para o seu ambiente local:
+
+
+
+```bash
+
+git  clone  https://github.com/Natannms/laraval-team-soft-api.git
+
+```
+
+
+
+
+2. Acesse o diretório do projeto
+
+```bash
+
+cd  laraval-team-soft-api
+
+```
+
+2. Instale as dependências do Composer:
+
+```bash
+
+composer install
+```
+
+4. Crie o arquivo de ambiente `.env`:
+``` cp .env.example .env ```
+
+5. Configure a conexão com o banco de dados no arquivo `.env`.
+Altere os valores de acordo com sua configuração:
+```
+DB_CONNECTION=mysql
+DB_HOST=seu_host
+DB_PORT=seu_port
+DB_DATABASE=seu_database
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
+7. Defina sua chave de API do Google no arquivo `.env`.
+Se você não tiver uma chave, use a seguinte chave temporária (válida até 20/05):
+
+``` GOOGLE_API_KEY=SUA_CHAVE_API ```
+
+8. Execute as migrações do banco de dados para criar as tabelas
+```php artisan migrate```
+
+9. Opcionalmente, você pode executar os seeders para popular o banco de dados com dados de exemplo:
+
+```php artisan db:seed```
+
+Isso criará 10 clientes e 100 endereços variados para uso na API.
+
+
+## Executando a API
+Após concluir as etapas de instalação, você pode iniciar o servidor de desenvolvimento do Laravel para executar a API. Execute o seguinte comando:
+
+```php artisan serve ```
+
+A API estará acessível em [http://localhost:8000](http://localhost:8000/).
+
+## Documentação da API
+
+A documentação da API, incluindo todos os endpoints disponíveis, está disponível no [Postman](https://documenter.getpostman.com/view/10562286/2s93kxcRej). Consulte a documentação para obter informações detalhadas sobre como usar cada endpoint.
+
+## Contribuição
+Se você deseja contribuir para este projeto, fique à vontade para abrir uma issue ou enviar um pull request com suas melhorias.
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](https://chat.openai.com/c/LICENSE).
+
+Certifique-se de substituir `SUA_CHAVE_API` pela sua chave de API do Google no arquivo `.env`.
